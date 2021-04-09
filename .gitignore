@@ -2,4 +2,5 @@
 TheAwakening/images/tmp/*
 TheAwakening/sourceimages/goegap_8k.tx
 *.tx
-.autosave/*
+TheAwakening/substance/PillarStone_normal.exr
+TheAwakening/substance/PillarStone_height.exr
