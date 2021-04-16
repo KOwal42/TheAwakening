@@ -1,6 +1,6 @@
 //Maya ASCII 2020 scene
 //Name: Rocks_REFS_Sandra.ma
-//Last modified: Fri, Apr 16, 2021 12:57:41 PM
+//Last modified: Fri, Apr 16, 2021 01:05:20 PM
 //Codeset: 1252
 requires maya "2020";
 requires "stereoCamera" "10.0";
@@ -15,7 +15,7 @@ fileInfo "product" "Maya 2020";
 fileInfo "version" "2020";
 fileInfo "cutIdentifier" "202011110415-b1e20b88e2";
 fileInfo "osv" "Microsoft Windows 10 Technical Preview  (Build 19042)\n";
-fileInfo "UUID" "0365DB95-4590-3A37-1F3F-AD997802A8C5";
+fileInfo "UUID" "5B0FF8E6-4B7B-BB9E-BA10-108F3709EA93";
 fileInfo "license" "student";
 createNode fosterParent -n "Rocks_REFS_SandraRNfosterParent1";
 	rename -uid "34D79034-4CB4-DEAD-618C-15999D639D34";
@@ -20875,6 +20875,7 @@ createNode mesh -n "RockBig_2_subdiv1_Final2:ZBrushPolyMesh3DShape" -p "RockBig_
 	setAttr ".ai_translator" -type "string" "polymesh";
 createNode transform -n "Sandra_Rendering_SetUp";
 	rename -uid "3757CC34-4A28-7E1D-1C7E-0185F9839DE0";
+	setAttr ".v" no;
 createNode transform -n "aiSkyDomeLight1" -p "Sandra_Rendering_SetUp";
 	rename -uid "A711A014-4700-E574-4D95-31B27BD1885C";
 	setAttr ".s" -type "double3" 2.0957214249872451 2.0957214249872451 2.0957214249872451 ;
@@ -76382,19 +76383,19 @@ createNode reference -n "Rocks_REFS_SandraRN";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "033D7AA1-4BE9-AC7F-F613-D68A9C4F3B58";
+	rename -uid "F612678A-41A2-26BB-2547-138984A64F54";
 	setAttr -s 17 ".lnk";
 	setAttr -s 17 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "A73D137E-428D-9745-67AA-F68EBB883163";
+	rename -uid "F5A064AE-4E8D-C7D6-4F78-05BE03F0DE83";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "49ED305A-4730-92FE-2BAE-F4A914008D75";
+	rename -uid "E7ED31CC-4945-8689-4BEA-128AC6F2A47F";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "85C0743A-4BF0-0024-A97F-BFA2206822A8";
+	rename -uid "50A9724D-4E10-81D4-0350-20B66769C791";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "DBD098E2-4B48-13B6-0677-28A8A9A4FAF0";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "E8D5EADD-4DB4-91B5-30AC-E487121BA02D";
+	rename -uid "7ACDC400-4011-0303-D458-2197CB427125";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "D53F26B0-4BE7-DCE9-5A01-D9BE283F1874";
 	setAttr ".g" yes;
@@ -77070,7 +77071,7 @@ createNode materialInfo -n "materialInfo12";
 createNode bump2d -n "bump2d5";
 	rename -uid "5444BBE4-4BCB-1670-1AA7-37AF41C9623B";
 	setAttr ".bi" 1;
-	setAttr ".vc1" -type "float3" 0 3.9999999e-05 0 ;
+	setAttr ".vc1" -type "float3" 0 4.9999999e-05 0 ;
 	setAttr ".vc2" -type "float3" 9.9999997e-06 9.9999997e-06 0 ;
 createNode displacementShader -n "SmallRock2_Disp";
 	rename -uid "D7DBAFBA-40EB-758C-BF73-A0A45701EAF9";
