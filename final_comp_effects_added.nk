@@ -1,0 +1,594 @@
+#! C:/Program Files/Nuke13.0v1/nuke-13.0.1.dll -nx
+#write_info Write1 file:"" format:"1280 720 1" chans:":rgba.red:rgba.green:rgba.blue:" framerange:"1 360" fps:"0" colorspace:"default" datatype:"unknown" transfer:"unknown" views:"main" colorManagement:"Nuke"
+version 13.0 v1
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1917" h="1008" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1254" stretch="1"/>
+            <splitter orientation="2">
+                <split size="567"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="399"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name D:/Nukecomp/Scripts/final_comp_effects_added.nk
+ project_directory "\[python \{nuke.script_directory()\}]"
+ frame 291
+ last_frame 360
+ lock_range true
+ format "1280 720 0 0 1280 720 1 HD_720"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ monitorOutLUT rec709
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam8/EXR/##.exr
+ format "960 402 0 0 960 402 1 "
+ last 18
+ origlast 18
+ origset true
+ on_error "nearest frame"
+ version 1
+ name Read4
+ xpos 816
+ ypos -392
+}
+Retime {
+ input.first_lock true
+ input.last 18
+ output.first 292
+ output.first_lock true
+ output.last 309
+ time ""
+ name Retime1
+ xpos 816
+ ypos -308
+}
+Reformat {
+ black_outside true
+ name Reformat3
+ xpos 816
+ ypos -189
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam8/c8FINAL.exr
+ format "1920 804 0 0 1920 804 1 "
+ origset true
+ name Read5
+ xpos 976
+ ypos -249
+}
+Reformat {
+ black_outside true
+ name Reformat4
+ xpos 976
+ ypos -165
+}
+Merge2 {
+ inputs 2
+ name Merge2
+ xpos 816
+ ypos -165
+}
+TimeClip {
+ time ""
+ first 292
+ last 360
+ origlast 360
+ origset true
+ mask_metadata true
+ name TimeClip1
+ xpos 690
+ ypos -165
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam7/Character_Denoised/Main_scene_###_denoised.exr
+ format "960 402 0 0 960 402 1 "
+ first 236
+ last 291
+ origfirst 236
+ origlast 291
+ origset true
+ on_error "nearest frame"
+ name Read3
+ xpos 481
+ ypos -488
+}
+set Nfb34f400 [stack 0]
+ColorCorrect {
+ gamma 1.7
+ name ColorCorrect1
+ xpos 481
+ ypos -404
+}
+Reformat {
+ black_outside true
+ name Reformat2
+ xpos 481
+ ypos -357
+}
+Transform {
+ translate {0 -16}
+ rotate 3
+ center {640 360}
+ name Transform1
+ xpos 481
+ ypos -333
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam7/c7FINAL.exr
+ format "1280 720 0 0 1280 720 1 HD_720"
+ origset true
+ name Read6
+ selected true
+ xpos 635
+ ypos -411
+}
+Reformat {
+ black_outside true
+ name Reformat1
+ xpos 635
+ ypos -298
+}
+Merge2 {
+ inputs 2
+ bbox B
+ name Merge1
+ xpos 481
+ ypos -298
+}
+TimeClip {
+ time ""
+ first 239
+ last 291
+ origlast 1
+ origset true
+ mask_metadata true
+ name TimeClip2
+ xpos 333
+ ypos -298
+}
+Constant {
+ inputs 0
+ channels rgb
+ first 219
+ last 236
+ name Constant1
+ xpos 134
+ ypos -375
+}
+AppendClip {
+ inputs 3
+ firstFrame 219
+ meta_from_first false
+ time ""
+ name AppendClip3
+ xpos 134
+ ypos -69
+}
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/VFXRenders/Shockwave/Frame#.exr
+ format "1280 535 0 0 1280 535 1 "
+ last 20
+ origfirst 197
+ origlast 216
+ origset true
+ name Read13
+ xpos -954
+ ypos 36
+}
+ColorCorrect {
+ saturation 1.46
+ contrast 1.26
+ gamma 0.65
+ gain 1.1
+ midtones.saturation 1.56
+ midtones.contrast 1.1
+ midtones.gamma 0.97
+ name ColorCorrect4
+ xpos -954
+ ypos -4
+}
+push 0
+Merge2 {
+ inputs 2
+ operation average
+ name Merge8
+ xpos -842
+ ypos -61
+}
+push 0
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/VFXRenders/DustExplosion1/Frame#.exr
+ format "1280 535 0 0 1280 535 1 "
+ last 20
+ origfirst 197
+ origlast 216
+ origset true
+ name Read8
+ xpos -758
+ ypos 36
+}
+ColorCorrect {
+ saturation 1.94
+ contrast 1.04
+ gain 0.7
+ shadows.saturation 0.66
+ shadows.contrast 0.94
+ shadows.gamma 1.02
+ shadows.gain 1.4
+ midtones.saturation 1.04
+ name ColorCorrect2
+ xpos -758
+ ypos -2
+}
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/VFXRenders/DustCloud/Frame#.exr
+ format "1280 535 0 0 1280 535 1 "
+ last 20
+ origfirst 197
+ origlast 216
+ origset true
+ name Read12
+ xpos -629
+ ypos 34
+}
+ColorCorrect {
+ saturation 1.74
+ contrast 1.28
+ gamma 0.95
+ gain 0.74
+ shadows.saturation 0.84
+ shadows.contrast 0.82
+ shadows.gamma 1.06
+ shadows.gain 1.26
+ midtones.saturation 1.02
+ midtones.contrast 0.92
+ midtones.gamma 0.97
+ midtones.gain 0.96
+ name ColorCorrect3
+ xpos -629
+ ypos -3
+}
+Merge2 {
+ inputs 3+1
+ name Merge7
+ xpos -687
+ ypos -61
+}
+AppendClip {
+ firstFrame 197
+ meta_from_first false
+ time ""
+ name AppendClip6
+ xpos -218
+ ypos -61
+}
+Rectangle {
+ inputs 0
+ area {953 -29 1027 753}
+ softness 34
+ name Rectangle5
+ xpos -523
+ ypos -329
+}
+Rectangle {
+ inputs 0
+ area {735 -24 906 743}
+ softness 34
+ name Rectangle4
+ xpos -619
+ ypos -330
+}
+Rectangle {
+ inputs 0
+ area {607 -5 680 777}
+ softness 34
+ name Rectangle3
+ xpos -708
+ ypos -327
+}
+push 0
+Rectangle {
+ inputs 0
+ area {405 -19 518 763}
+ softness 34
+ name Rectangle1
+ xpos -917
+ ypos -325
+}
+Rectangle {
+ inputs 0
+ area {257 -15 331 767}
+ softness 34
+ name Rectangle2
+ xpos -814
+ ypos -331
+}
+Merge2 {
+ inputs 5+1
+ name Merge4
+ xpos -708
+ ypos -258
+}
+CornerPin2D {
+ to1 {310 -12}
+ to2 {1086 2}
+ to3 {1670 720}
+ to4 {-320 748}
+ invert false
+ from1 {0 0}
+ from2 {1280 0}
+ from3 {1280 720}
+ from4 {0 720}
+ name CornerPin2D1
+ xpos -708
+ ypos -234
+}
+Ramp {
+ inputs 0
+ p0 {158 716}
+ p1 {166 8}
+ type plinear
+ name Ramp1
+ xpos -867
+ ypos -201
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge5
+ xpos -708
+ ypos -201
+}
+Blur {
+ size 76
+ quality 40
+ mix 0.885
+ name Blur1
+ xpos -708
+ ypos -177
+}
+Reformat {
+ resize distort
+ name Reformat9
+ xpos -567
+ ypos -171
+}
+Transform {
+ translate {-12 114}
+ center {640 360}
+ name Transform2
+ xpos -462
+ ypos -171
+}
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/Cam6/C6_Background_v1.exr
+ format "960 404 0 0 960 404 1.00579 "
+ origset true
+ name Read10
+ xpos -392
+ ypos -320
+}
+Reformat {
+ format "1280 535 0 0 1280 535 1 "
+ black_outside true
+ name Reformat10
+ xpos -392
+ ypos -236
+}
+set Nc91eb400 [stack 0]
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/Cam6/C6_Background_v2.exr
+ format "960 404 0 0 960 404 1.00579 "
+ origset true
+ name Read11
+ xpos -292
+ ypos -316
+}
+Reformat {
+ format "1280 535 0 0 1280 535 1 "
+ black_outside true
+ name Reformat11
+ xpos -292
+ ypos -232
+}
+set Nc91ea400 [stack 0]
+Merge2 {
+ inputs 2+1
+ operation copy
+ bbox A
+ maskChannelInput -rgba.alpha
+ name Merge3
+ xpos -292
+ ypos -171
+}
+Merge2 {
+ inputs 2
+ name Merge6
+ xpos -218
+ ypos -111
+}
+TimeClip {
+ time ""
+ first 200
+ last 218
+ origlast 1
+ origset true
+ mask_metadata true
+ name TimeClip3
+ xpos -134
+ ypos -171
+}
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/Cam5/Denoised/Render_1.####_denoised.exr
+ format "960 404 0 0 960 404 1.00579 "
+ first 175
+ last 199
+ origfirst 175
+ origlast 199
+ origset true
+ name Read7
+ xpos -168
+ ypos -396
+}
+Reformat {
+ black_outside true
+ name Reformat7
+ xpos -168
+ ypos -312
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam2/Denoised/Render_####_denoised.exr
+ format "1280 538 0 0 1280 538 1.00455 "
+ first 120
+ last 174
+ origfirst 120
+ origlast 174
+ origset true
+ on_error "nearest frame"
+ name Read2
+ xpos -164
+ ypos -564
+}
+Reformat {
+ black_outside true
+ name Reformat6
+ xpos -164
+ ypos -443
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam1/Denoised/Render_####_denoised.exr
+ last 116
+ origlast 116
+ origset true
+ on_error "nearest frame"
+ name Read1
+ xpos -24
+ ypos -568
+}
+Reformat {
+ black_outside true
+ name Reformat5
+ xpos -24
+ ypos -484
+}
+AppendClip {
+ inputs 2
+ meta_from_first false
+ time ""
+ name AppendClip2
+ xpos -24
+ ypos -443
+}
+AppendClip {
+ inputs 2
+ meta_from_first false
+ time ""
+ name AppendClip1
+ xpos -24
+ ypos -312
+}
+AppendClip {
+ inputs 2
+ meta_from_first false
+ time ""
+ name AppendClip5
+ xpos -24
+ ypos -171
+}
+AppendClip {
+ inputs 2
+ meta_from_first false
+ time ""
+ name AppendClip4
+ xpos -24
+ ypos 50
+}
+set Nc9195400 [stack 0]
+Write {
+ name Write1
+ xpos -24
+ ypos 120
+}
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/Cam7/Vector/V_###.exr
+ format "960 402 0 0 960 402 1 "
+ first 236
+ last 291
+ origfirst 236
+ origlast 291
+ origset true
+ name Read9
+ xpos 344
+ ypos -488
+}
+push $Nfb34f400
+push $Nc91eb400
+push $Nc91ea400
+push $Nc9195400
+Viewer {
+ inputs 4
+ frame 291
+ frame_range 1-360
+ input_number 3
+ gauge 0
+ name Viewer2
+ xpos 1268
+ ypos -367
+}
