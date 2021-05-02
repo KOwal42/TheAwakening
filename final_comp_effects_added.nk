@@ -12,11 +12,11 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
             <split size="1254" stretch="1"/>
             <splitter orientation="2">
                 <split size="567"/>
-                <dock id="" activePageId="Viewer.1">
+                <dock id="" activePageId="Viewer.1" focus="true">
                     <page id="Viewer.1"/>
                 </dock>
                 <split size="399"/>
-                <dock id="" activePageId="DAG.1" focus="true">
+                <dock id="" activePageId="DAG.1">
                     <page id="DAG.1"/>
                     <page id="Curve Editor.1"/>
                     <page id="DopeSheet.1"/>
@@ -35,7 +35,7 @@ Root {
  inputs 0
  name D:/Nukecomp/Scripts/final_comp_effects_added.nk
  project_directory "\[python \{nuke.script_directory()\}]"
- frame 291
+ frame 9
  last_frame 360
  lock_range true
  format "1280 720 0 0 1280 720 1 HD_720"
@@ -49,6 +49,111 @@ Root {
  int16Lut sRGB
  logLut Cineon
  floatLut linear
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam8/c8FINAL.exr
+ format "1920 804 0 0 1920 804 1 "
+ origset true
+ name Read5
+ xpos 983
+ ypos -279
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam7/c7FINAL.exr
+ format "1280 720 0 0 1280 720 1 HD_720"
+ origset true
+ name Read6
+ xpos 637
+ ypos -542
+}
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/Cam7/Vector/V_###.exr
+ format "960 402 0 0 960 402 1 "
+ first 236
+ last 291
+ origfirst 236
+ origlast 291
+ origset true
+ name Read9
+ xpos 392
+ ypos -574
+}
+Read {
+ inputs 0
+ file_type exr
+ file ../Renders/Cam7/Character_Denoised/Main_scene_###_denoised.exr
+ format "960 402 0 0 960 402 1 "
+ first 236
+ last 291
+ origfirst 236
+ origlast 291
+ origset true
+ on_error "nearest frame"
+ name Read3
+ xpos 481
+ ypos -488
+}
+set N7fdff400 [stack 0]
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/Cam6/C6_Background_v1.exr
+ format "960 404 0 0 960 404 1.00579 "
+ origset true
+ name Read10
+ xpos -397
+ ypos -317
+}
+Reformat {
+ format "1280 535 0 0 1280 535 1 "
+ black_outside true
+ name Reformat10
+ xpos -397
+ ypos -233
+}
+set N39c400 [stack 0]
+push 0
+Read {
+ inputs 0
+ file_type exr
+ file D:/Nukecomp/Renders/VFXRenders/DustExplosion1/Frame#.exr
+ format "1280 535 0 0 1280 535 1 "
+ last 20
+ origlast 20
+ origset true
+ name Read17
+ xpos 673
+ ypos 20
+}
+ColorCorrect {
+ saturation 0.6
+ contrast 1.94
+ gamma 0.97
+ name ColorCorrect6
+ xpos 673
+ ypos -4
+}
+AppendClip {
+ firstFrame 287
+ meta_from_first false
+ time ""
+ name AppendClip8
+ xpos 673
+ ypos -53
+}
+OFlow2 {
+ input.first 287
+ input.last 306
+ timingOutputSpeed 0.2
+ name OFlow2
+ xpos 673
+ ypos -102
 }
 Read {
  inputs 0
@@ -84,12 +189,12 @@ Reformat {
 Read {
  inputs 0
  file_type exr
- file ../Renders/Cam8/c8FINAL.exr
+ file D:/Nukecomp/Renders/Cam8/C8_Background.exr
  format "1920 804 0 0 1920 804 1 "
  origset true
- name Read5
- xpos 976
- ypos -249
+ name Read14
+ xpos 1111
+ ypos -195
 }
 Reformat {
  black_outside true
@@ -103,6 +208,13 @@ Merge2 {
  xpos 816
  ypos -165
 }
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge10
+ xpos 673
+ ypos -165
+}
 TimeClip {
  time ""
  first 292
@@ -111,25 +223,48 @@ TimeClip {
  origset true
  mask_metadata true
  name TimeClip1
- xpos 690
+ xpos 472
  ypos -165
 }
 Read {
  inputs 0
  file_type exr
- file ../Renders/Cam7/Character_Denoised/Main_scene_###_denoised.exr
- format "960 402 0 0 960 402 1 "
- first 236
- last 291
- origfirst 236
- origlast 291
+ file D:/Nukecomp/Renders/VFXRenders/DustExplosion1/Frame#.exr
+ format "1280 535 0 0 1280 535 1 "
+ last 20
+ origlast 20
  origset true
- on_error "nearest frame"
- name Read3
- xpos 481
- ypos -488
+ name Read16
+ xpos 300
+ ypos -524
 }
-set Nfb34f400 [stack 0]
+ColorCorrect {
+ saturation 0.7
+ contrast 1.78
+ gamma 0.69
+ shadows.contrast 1.02
+ name ColorCorrect5
+ selected true
+ xpos 348
+ ypos -431
+}
+AppendClip {
+ firstFrame 234
+ meta_from_first false
+ time ""
+ name AppendClip7
+ xpos 348
+ ypos -407
+}
+OFlow2 {
+ input.first 234
+ input.last 253
+ timingOutputSpeed 0.3
+ name OFlow1
+ xpos 348
+ ypos -369
+}
+push $N7fdff400
 ColorCorrect {
  gamma 1.7
  name ColorCorrect1
@@ -152,14 +287,13 @@ Transform {
 }
 Read {
  inputs 0
- file_type exr
- file ../Renders/Cam7/c7FINAL.exr
- format "1280 720 0 0 1280 720 1 HD_720"
+ file_type tiff
+ file D:/Nukecomp/Renders/Cam7/C7_Background.tif
+ format "1920 804 0 0 1920 804 1 "
  origset true
- name Read6
- selected true
+ name Read15
  xpos 635
- ypos -411
+ ypos -424
 }
 Reformat {
  black_outside true
@@ -174,6 +308,13 @@ Merge2 {
  xpos 481
  ypos -298
 }
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge9
+ xpos 348
+ ypos -298
+}
 TimeClip {
  time ""
  first 239
@@ -182,7 +323,7 @@ TimeClip {
  origset true
  mask_metadata true
  name TimeClip2
- xpos 333
+ xpos 221
  ypos -298
 }
 Constant {
@@ -192,7 +333,7 @@ Constant {
  last 236
  name Constant1
  xpos 134
- ypos -375
+ ypos -479
 }
 AppendClip {
  inputs 3
@@ -405,24 +546,7 @@ Transform {
  xpos -462
  ypos -171
 }
-Read {
- inputs 0
- file_type exr
- file D:/Nukecomp/Renders/Cam6/C6_Background_v1.exr
- format "960 404 0 0 960 404 1.00579 "
- origset true
- name Read10
- xpos -392
- ypos -320
-}
-Reformat {
- format "1280 535 0 0 1280 535 1 "
- black_outside true
- name Reformat10
- xpos -392
- ypos -236
-}
-set Nc91eb400 [stack 0]
+push $N39c400
 Read {
  inputs 0
  file_type exr
@@ -440,7 +564,6 @@ Reformat {
  xpos -292
  ypos -232
 }
-set Nc91ea400 [stack 0]
 Merge2 {
  inputs 2+1
  operation copy
@@ -558,37 +681,25 @@ AppendClip {
  xpos -24
  ypos 50
 }
-set Nc9195400 [stack 0]
+CameraShake3 {
+ name CameraShake3_1
+ label "\[value amplitude] px at \[value frequency]"
+ xpos 122
+ ypos 44
+ amplitude {{curve x177 0 x182 14 x193 20 x197 55 x216 0}}
+ cs_center {{"\[value input.width 0]/2"} {"\[value input.height 0]/2"}}
+}
 Write {
  name Write1
- xpos -24
- ypos 120
+ xpos 122
+ ypos 142
 }
-Read {
- inputs 0
- file_type exr
- file D:/Nukecomp/Renders/Cam7/Vector/V_###.exr
- format "960 402 0 0 960 402 1 "
- first 236
- last 291
- origfirst 236
- origlast 291
- origset true
- name Read9
- xpos 344
- ypos -488
-}
-push $Nfb34f400
-push $Nc91eb400
-push $Nc91ea400
-push $Nc9195400
 Viewer {
  inputs 4
- frame 291
+ frame 9
  frame_range 1-360
- input_number 3
  gauge 0
  name Viewer2
- xpos 1268
- ypos -367
+ xpos 122
+ ypos 267
 }
